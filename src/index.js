@@ -23,6 +23,7 @@ class CountdownTimer {
         const currentTime = Date.now();
         const deltaTime = this.targetDate - currentTime;
         this.getTimeComponents(deltaTime);
+        this.finishTime(deltaTime);
     }, 1000);
 
  getTimeComponents(time) {
@@ -39,6 +40,17 @@ class CountdownTimer {
 
   pad(value) {
     return String(value).padStart(2, '0');
+  }
+
+  finishTime(deltaTime) {
+    const finish = '00'
+    if (deltaTime < 0) {
+      clearInterval(this.intervalId);
+      this.refs.days.textContent = `${finish}`;
+      this.refs.hours.textContent = `${finish}`;
+      this.refs.mins.textContent = `${finish}`;
+      this.refs.secs.textContent = `${finish}`;
+    }
   }
 };
 
